@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/fsnotify/fsnotify v1.6.0
-	github.com/golang/glog v1.1.0
+	github.com/golang/glog v1.2.4
 	github.com/hashicorp/golang-lru/v2 v2.0.2
 	github.com/insomniacslk/dhcp v0.0.0-20230307103557-e252950ab961
 	golang.org/x/time v0.3.0
