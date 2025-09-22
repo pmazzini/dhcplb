@@ -9,6 +9,8 @@ package dhcplb
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestRREmpty(t *testing.T) {
@@ -16,9 +18,7 @@ func TestRREmpty(t *testing.T) {
 	_, err := subject.SelectRatioBasedDhcpServer(&DHCPMessage{
 		ClientID: []byte{0},
 	})
-	if err == nil {
-		t.Fatalf("Should throw an error if server list is empty")
-	}
+	require.Error(t, err)
 }
 
 func TestRRBalance(t *testing.T) {
@@ -35,11 +35,7 @@ func TestRRBalance(t *testing.T) {
 	}
 	for i := 0; i < 4; i++ {
 		server, err := subject.SelectRatioBasedDhcpServer(&msg)
-		if err != nil {
-			t.Fatalf("Unexpected error selecting server: %s", err)
-		}
-		if server.Port != i {
-			t.Fatalf("Chose wrong server %d, expected %d", server.Port, i)
-		}
+		require.NoError(t, err)
+		require.Equal(t, i, server.Port)
 	}
 }
